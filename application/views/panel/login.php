@@ -34,9 +34,15 @@ ddaccordion.init({
 	
 	$(document).ready(function() {
 		$('.ask').jConfirmAction();
-		$('#show-login').click(function() {
-			$("#login-form").hide();
-		});
+		$("#forgot-form").hide();
+		$("#show-forgot").click(function(e) {
+            $("#login-form").slideUp(300);
+			$("#forgot-form").slideDown(300);
+        });
+		$("#show-login").click(function(e) {
+            $("#forgot-form").slideUp(300);
+			$("#login-form").slideDown(300);
+        });
 	});
 	
 </script>
@@ -99,17 +105,6 @@ ddaccordion.init({
                     <dl>
                         <dt><label for="email">Username:</label></dt>
                         <dd><input type="text" name="" id="" size="54" /></dd>
-                    </dl>
-                    <dl>
-                        <dt><label for="password">Password:</label></dt>
-                        <dd><input type="text" name="" id="" size="54" /></dd>
-                    </dl>
-                    
-                    <dl>
-                        <dt><label></label></dt>
-                        <dd>
-                    <input type="checkbox" name="interests[]" id="" value="" /><label class="check_label">Remember me</label>
-                        </dd>
                     </dl>
                     
                      <dl class="submit">
