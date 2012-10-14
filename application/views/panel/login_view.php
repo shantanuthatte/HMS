@@ -3,9 +3,9 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>HMS - Login</title>
-<link rel="stylesheet" type="text/css" href="css/panel/style.css" />
+<link rel="stylesheet" type="text/css" href="../css/panel/style.css" />
 <script type="text/javascript" src="http://code.jquery.com/jquery.min.js"></script>
-<script type="text/javascript" src="js/ddaccordion.js"></script>
+<script type="text/javascript" src="../js/ddaccordion.js"></script>
 <script type="text/javascript">
 ddaccordion.init({
 	headerclass: "submenuheader", //Shared CSS class name of headers group
@@ -29,7 +29,8 @@ ddaccordion.init({
 })
 </script>
 
-<script type="text/javascript" src="js/jconfirmaction.jquery.js"></script>
+<script type="text/javascript" src="../js/jconfirmaction.jquery.js"></script>
+<script type="text/javascript" src="../js/md5.js"></script>
 <script type="text/javascript">
 	
 	$(document).ready(function() {
@@ -43,12 +44,17 @@ ddaccordion.init({
             $("#forgot-form").slideUp(300);
 			$("#login-form").slideDown(300);
         });
+       	$("#form-login").submit(function(e) {
+            $("#login-password").val(CryptoJS.MD5($("#login-password").val()));
+			alert($("#login-password").val());
+        });
+        
 	});
 	
 </script>
 
-<script language="javascript" type="text/javascript" src="js/niceforms.js"></script>
-<link rel="stylesheet" type="text/css" media="all" href="css/panel/niceforms-default.css" />
+<script language="javascript" type="text/javascript" src="../js/niceforms.js"></script>
+<link rel="stylesheet" type="text/css" media="all" href="../css/panel/niceforms-default.css" />
 <link href='http://fonts.googleapis.com/css?family=Audiowide' rel='stylesheet' type='text/css'>
 </head>
 <body>
@@ -61,21 +67,20 @@ ddaccordion.init({
 
      
          <div class="login_form" id="login-form">
-         
          <h3>HMS Login</h3>
          
          <a href="#" class="forgot_pass" id="show-forgot">Forgot password</a> 
          
-         <form action="" method="post" class="niceform">
-         
+         <form action="" method="post" class="niceform" id="form-login">
+         <input type="hidden" name="<?php echo $this->security->get_csrf_token_name(); ?>" value="<?php echo $this->security->get_csrf_hash();?>" />
                 <fieldset>
                     <dl>
-                        <dt><label for="email">Username:</label></dt>
-                        <dd><input type="text" name="" id="" size="54" /></dd>
+                        <dt><label for="username">Username:</label></dt>
+                        <dd><input type="text" name="username" id="" size="54" /></dd>
                     </dl>
                     <dl>
                         <dt><label for="password">Password:</label></dt>
-                        <dd><input type="text" name="" id="" size="54" /></dd>
+                        <dd><input type="password" name="password" id="login-password" size="54" /></dd>
                     </dl>
                     
                     <dl>
